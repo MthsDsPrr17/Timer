@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amor Infinito</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffc0cb, #ffb6c1, #ffe4e1, #f8bbd0);
+      color: #333;
+      padding: 4vw;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 2vw;
+    }
+
+    .title {
+      text-align: center;
+      font-size: clamp(1.8rem, 6vw, 3rem);
+      color: #d81b60;
+      margin-bottom: 4vw;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .title::before,
+    .title::after {
+      content: '❤';
+      margin: 0 10px;
+      color: #ff4081;
+    }
+
+    .slider {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: 6vw;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slides {
+  display: flex;
+  animation: slide 72s infinite;
+}
+
+.slides img {
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  max-height: 600px; /* Ajuste conforme a altura desejada */
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .slides img {
+    aspect-ratio: 4/3;
+    max-height: 300px; /* Limita a altura no mobile */
+  }
+}
+
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      8.33% { transform: translateX(-100%); }
+      16.66% { transform: translateX(-200%); }
+      25% { transform: translateX(-300%); }
+      33.33% { transform: translateX(-400%); }
+      41.66% { transform: translateX(-500%); }
+      50% { transform: translateX(-600%); }
+      58.33% { transform: translateX(-700%); }
+      66.66% { transform: translateX(-800%); }
+      75% { transform: translateX(-900%); }
+      83.33% { transform: translateX(-1000%); }
+      91.66% { transform: translateX(-1100%); }
+      100% { transform: translateX(0); }
+    }
+
+    .love-text {
+      margin: 5vw 0;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      text-align: center;
+      line-height: 1.6;
+      color: #c2185b;
+      font-weight: 500;
+      padding: 2vw 4vw;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .timer {
+      text-align: center;
+      padding: 4vw;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      margin-top: 6vw;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .timer h2::before {
+      content: '❤ ';
+      color: #ff4081;
+    }
+
+    .timer h2 {
+      margin-bottom: 3vw;
+      font-size: clamp(1.2rem, 5vw, 1.5rem);
+      color: #880e4f;
+    }
+
+    #time {
+      font-size: clamp(1rem, 4.5vw, 1.2rem);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3vw 5vw;
+      color: #6a1b9a;
+    }
+
+    #time span {
+      font-weight: bold;
+      color: #4a0072;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      color: #ff69b4;
+      animation: floatUp 6s linear infinite;
+      z-index: 0;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .slides img {
+        aspect-ratio: 4/3;
+      }
+
+      body {
+        padding: 6vw;
+      }
+
+      .container {
+        padding: 0 4vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bg-music" src="alaska.mp3" autoplay loop></audio>
+
+<button onclick="toggleMusic()" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background-color: #ff4081;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 999;
+">🎵</button>
+
+<script>
+  const music = document.getElementById("bg-music");
+
+  function toggleMusic() {
+    if (music.paused) {
+      music.play();
+    } else {
+      music.pause();
+    }
+  }
+</script>
+  <div class="container">
+    <div class="title">Jeriolli e Ashley</div>
+
+    <div class="slider">
+      <div class="slides">
+        <img src="1000119491.jpg" alt="Imagem 1" />
+        <img src="1000119492.jpg" alt="Imagem 2" />
+        <img src="1000119493.jpg" alt="Imagem 3" />
+        <img src="1000119366.jpg" alt="Imagem 4" />
+        <img src="1000119362.jpg" alt="Imagem 5" />
+        <img src="1000119363.jpg" alt="Imagem 6" />
+        <img src="1000119482.jpg" alt="Imagem 7" />
+        <img src="1000119489.jpg" alt="Imagem 8" />
+        <img src="1000119479.jpg" alt="Imagem 9" />
+        <img src="1000119476.jpg" alt="Imagem 10" />
+        <img src="1000119474.jpg" alt="Imagem 11" />
+        <img src="1000119486.jpg" alt="Imagem 12" />
+      </div>
+    </div>
+
+    <div class="love-text">
+      Se eu pudesse quantificar meu amor por você, tudo ao redor seria pequeno, até o universo que está em constante expansão se torna menor que um átomo quando comparado. Eu amo você e sou completamente apaixonado por tudo em VOCÊ, seu jeito, voz, sorriso, olhar, abraço, mãozinhas, corpo delirante, beijo, sexo, sua energia me excita! Obrigado por me fazer o homem mais sortudo e feliz do mundo.
+    </div>
+
+    <div class="timer">
+      <h2>Tempo desde 09/04/2024 às 21:38</h2>
+      <div id="time">
+        <span id="years">0</span> anos
+        <span id="months">0</span> meses
+        <span id="days">0</span> dias
+        <span id="hours">00</span>h
+        <span id="minutes">00</span>m
+        <span id="seconds">00</span>s
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateTimer() {
+      const start = new Date(2025, 3, 9, 21, 38, 0);
+      const now = new Date();
+
+      let years = now.getFullYear() - start.getFullYear();
+      let months = now.getMonth() - start.getMonth();
+      let days = now.getDate() - start.getDate();
+      let hours = now.getHours() - start.getHours();
+      let minutes = now.getMinutes() - start.getMinutes();
+      let seconds = now.getSeconds() - start.getSeconds();
+
+      if (seconds < 0) { seconds += 60; minutes--; }
+      if (minutes < 0) { minutes += 60; hours--; }
+      if (hours < 0) { hours += 24; days--; }
+      if (days < 0) {
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+        days += prevMonth;
+        months--;
+      }
+      if (months < 0) { months += 12; years--; }
+
+      document.getElementById("years").textContent = years;
+      document.getElementById("months").textContent = months;
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 2) + "s";
+      heart.textContent = "♥";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 400);
+  </script>
+</body>
+</html>
